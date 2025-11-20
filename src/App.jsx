@@ -1,71 +1,43 @@
+import React from 'react'
+import Hero from './components/Hero'
+import Services from './components/Services'
+import Testimonials from './components/Testimonials'
+import Contact from './components/Contact'
+import Footer from './components/Footer'
+
 function App() {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000'
+
+  const handleAudit = () => {
+    const el = document.getElementById('contact')
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  const handleWhatsapp = () => {
+    window.open('https://wa.me/15555555555', '_blank')
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
-      {/* Subtle pattern overlay */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(59,130,246,0.05),transparent_50%)]"></div>
-
-      <div className="relative min-h-screen flex items-center justify-center p-8">
-        <div className="max-w-2xl w-full">
-          {/* Header with Flames icon */}
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center mb-6">
-              <img
-                src="/flame-icon.svg"
-                alt="Flames"
-                className="w-24 h-24 drop-shadow-[0_0_25px_rgba(59,130,246,0.5)]"
-              />
-            </div>
-
-            <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
-              Flames Blue
-            </h1>
-
-            <p className="text-xl text-blue-200 mb-6">
-              Build applications through conversation
-            </p>
-          </div>
-
-          {/* Instructions */}
-          <div className="bg-slate-800/50 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-8 shadow-xl mb-6">
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                1
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Describe your idea</h3>
-                <p className="text-blue-200/80 text-sm">Use the chat panel on the left to tell the AI what you want to build</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4 mb-6">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                2
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Watch it build</h3>
-                <p className="text-blue-200/80 text-sm">Your app will appear in this preview as the AI generates the code</p>
-              </div>
-            </div>
-
-            <div className="flex items-start gap-4">
-              <div className="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-lg flex items-center justify-center font-bold">
-                3
-              </div>
-              <div>
-                <h3 className="font-semibold text-white mb-1">Refine and iterate</h3>
-                <p className="text-blue-200/80 text-sm">Continue the conversation to add features and make changes</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="text-center">
-            <p className="text-sm text-blue-300/60">
-              No coding required • Just describe what you want
-            </p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-slate-950 text-white">
+      <Hero onPrimaryCta={handleAudit} onSecondaryCta={handleWhatsapp} />
+      <Services />
+      <Testimonials />
+      <div id="contact">
+        <Contact backendUrl={backendUrl} />
       </div>
+      <Footer />
+
+      {/* Floating WhatsApp */}
+      <a
+        href="https://wa.me/15555555555"
+        target="_blank"
+        rel="noreferrer"
+        className="fixed bottom-6 right-6 inline-flex h-14 w-14 items-center justify-center rounded-full bg-emerald-500 text-white shadow-xl shadow-emerald-500/30 hover:scale-[1.02] transition"
+        aria-label="WhatsApp Now"
+      >
+        {/* Simple WA glyph */}
+        <svg viewBox="0 0 32 32" fill="currentColor" className="h-7 w-7"><path d="M19.11 17.08a5.48 5.48 0 0 1-2.38-.65c-.73-.37-1.42-.84-2.03-1.41-.51-.49-.96-1.05-1.32-1.67-.46-.76-.74-1.6-.81-2.48-.04-.52.17-1.02.56-1.36.18-.15.36-.3.54-.44.24-.19.56-.24.84-.12.44.22.88.45 1.31.68.37.2.57.6.5 1.02-.05.3-.11.6-.2.89-.05.15-.03.32.05.46.3.53.71 1 1.22 1.34.14.09.32.12.48.08.33-.08.66-.19.97-.32.33-.14.7-.07.97.18.33.32.65.64.96.98.2.23.26.55.15.84-.14.38-.29.75-.47 1.11-.15.29-.45.47-.77.47Zm-3.1 6.42c-1.32 0-2.61-.33-3.76-.96l-2.5.65c-.38.1-.77-.13-.86-.51l-.6-2.44a8.69 8.69 0 0 1-1.03-4.08c0-4.84 3.94-8.78 8.75-8.78 4.84 0 8.78 3.94 8.78 8.78a8.77 8.77 0 0 1-8.78 8.78Zm0-15.5c-3.73 0-6.75 3.03-6.75 6.75 0 1.32.38 2.6 1.11 3.7.08.12.11.26.08.4l.35 1.43 1.47-.38c.12-.03.25-.02.36.05a6.72 6.72 0 0 0 3.38.9c3.72 0 6.75-3.02 6.75-6.75 0-3.71-3.03-6.75-6.75-6.75Z"/></svg>
+      </a>
     </div>
   )
 }
